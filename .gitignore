@@ -1,0 +1,28 @@
+# Poetry
+__pychache__/
+.poetry/
+*.egg-info/
+/.venv
+dist/
+
+# Pycharm files
+.idea/
+
+# MacOS
+.DS_Storage
+
+# Virtual variables
+.env
+
+# Session files
+*.session
+*.session-journal
+
+# Log
+*.log
+
+# Deploy snippets
+deploy.md
+
+# Data Base
+*.sqlite3
