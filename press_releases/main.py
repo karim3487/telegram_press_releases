@@ -22,7 +22,9 @@ async def message_handler(event: events.NewMessage.Event) -> None:
     chat = await event.get_chat()
     chat_username = chat.username
 
-    log_new_message(message.chat.title, json.dumps(clean_message(message)))
+    json_msg = json.dumps(clean_message(message), ensure_ascii=False)
+
+    log_new_message(message.chat.title, json_msg)
 
     if not message.message:
         return
@@ -42,7 +44,7 @@ async def message_handler(event: events.NewMessage.Event) -> None:
 
     try:
         db.add_record(record)
-        logger.info(f"Processed message from {chat_username}. Message: {message}")
+        logger.info(f"Processed message from {chat_username}. Message: {json_msg}")
     except Exception as e:
         logger.error(f"Failed to add record from {chat_username}. Error: {e}")
 
