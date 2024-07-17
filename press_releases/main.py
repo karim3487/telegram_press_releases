@@ -6,8 +6,14 @@ from press_releases.db.models import Record
 from telethon import TelegramClient, events
 import config_reader as cfg
 from logging_config import setup_logger
-from press_releases.utils import log_new_message, extract_title_and_text_from_message, ensure_directory_exists, \
-    add_channels_to_db, clean_message
+from press_releases.utils import (
+    log_new_message,
+    extract_title_and_text_from_message,
+    ensure_directory_exists,
+    add_channels_to_db,
+    clean_message,
+    custom_json_serializer,
+)
 
 logger = setup_logger(__name__)
 
@@ -22,7 +28,12 @@ async def message_handler(event: events.NewMessage.Event) -> None:
     chat = await event.get_chat()
     chat_username = chat.username
 
-    json_msg = json.dumps(clean_message(message), ensure_ascii=False)
+    json_msg = json.dumps(
+        clean_message(message),
+        default=custom_json_serializer,
+        ensure_ascii=False,
+        indent=4,
+    )
 
     log_new_message(message.chat.title, json_msg)
 

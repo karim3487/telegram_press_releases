@@ -13,6 +13,14 @@ DB_HOST = env.str("DB_HOST")
 DB_PORT = env.str("DB_PORT")
 
 CHANNELS = env.list(
-    "CHANNELS", ["news24kg", "kaktus_mediakg", "kloopnews", "akipress", "azattykrus"]
+    "CHANNELS",
+    [
+        "news24kg",
+        "kaktus_mediakg",
+        "kloopnews",
+        "akipress",
+        "azattykrus",
+        "news_handler",
+    ],
 )
 # CHANNELS = env.list("CHANNELS", ["news_handler"])

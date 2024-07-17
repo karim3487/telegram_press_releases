@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from typing import Tuple, Optional
 
@@ -56,6 +57,13 @@ def extract_title_and_text_from_message(message: str) -> Tuple[Optional[str], st
     return title, text
 
 
+def custom_json_serializer(obj):
+    try:
+        return json.dumps(obj)
+    except TypeError:
+        return str(obj)
+
+
 def add_channels_to_db() -> None:
     """
     Add configured channels to the database.
@@ -81,4 +89,3 @@ def clean_message(message: Message) -> dict:
         "url": f"https://t.me/{message.chat.username}/{message.id}",
     }
     return c_msg
-

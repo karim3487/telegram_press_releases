@@ -45,7 +45,9 @@ class Database:
                 logger.error("Error adding channels: %s", e)
                 raise e
 
-    def get_channel_by_id(self, channel_id: int, session: Optional[Session] = None) -> Optional[Source]:
+    def get_channel_by_id(
+        self, channel_id: int, session: Optional[Session] = None
+    ) -> Optional[Source]:
         """Get a channel by its ID."""
         close_session = False
         if session is None:
@@ -53,13 +55,19 @@ class Database:
             close_session = True
         try:
             channel = session.query(Source).filter_by(id=channel_id).first()
-            logger.debug("Channel retrieved by ID %d: %s", channel_id, channel.name if channel else "None")
+            logger.debug(
+                "Channel retrieved by ID %d: %s",
+                channel_id,
+                channel.name if channel else "None",
+            )
             return channel
         finally:
             if close_session:
                 session.close()
 
-    def get_channel_by_name(self, channel_name: str, session: Optional[Session] = None) -> Optional[Source]:
+    def get_channel_by_name(
+        self, channel_name: str, session: Optional[Session] = None
+    ) -> Optional[Source]:
         """Get a channel by its name."""
         close_session = False
         if session is None:
@@ -67,7 +75,11 @@ class Database:
             close_session = True
         try:
             channel = session.query(Source).filter_by(name=channel_name).first()
-            logger.debug("Channel retrieved by name %s: %s", channel_name, channel.name if channel else "None")
+            logger.debug(
+                "Channel retrieved by name %s: %s",
+                channel_name,
+                channel.name if channel else "None",
+            )
             return channel
         finally:
             if close_session:
@@ -91,6 +103,7 @@ class Database:
                 session.rollback()
                 logger.error("Error adding record: %s", e)
                 raise e
+
 
 # Используйте конфигурацию из вашего файла настроек
 # DATABASE_URL = f"postgresql://{cfg.DB_USER}:{cfg.DB_PASSWORD}@{cfg.DB_HOST}/{cfg.DB_NAME}"
