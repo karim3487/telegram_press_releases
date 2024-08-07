@@ -4,6 +4,8 @@ from sqlalchemy.orm import sessionmaker, Session
 from press_releases.db.models import Source, Record, Base
 from press_releases.logging_config import setup_logger
 
+import press_releases.config_reader as cfg
+
 logger = setup_logger(__name__)
 
 
@@ -106,7 +108,7 @@ class Database:
 
 
 # Используйте конфигурацию из вашего файла настроек
-# DATABASE_URL = f"postgresql://{cfg.DB_USER}:{cfg.DB_PASSWORD}@{cfg.DB_HOST}/{cfg.DB_NAME}"
+DATABASE_URL = f"postgresql://{cfg.DB_USER}:{cfg.DB_PASSWORD}@{cfg.DB_HOST}/{cfg.DB_NAME}"
 
-DATABASE_URL = "sqlite:///press_rel.sqlite3"
+# DATABASE_URL = "sqlite:///press_rel.sqlite3"
 db = Database(DATABASE_URL)

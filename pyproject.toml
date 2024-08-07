@@ -4,6 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Karim Kabirov <karim3487@gmail.com>"]
 readme = "README.md"
+include = ["press_releases/**", "telegram_sessions/*", "README.md", ".env"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
